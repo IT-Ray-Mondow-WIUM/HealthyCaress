@@ -18,7 +18,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
-<body class="bg-dark bg-gradient">
+<body class="bg-light">
     @yield('content')
 </body>
 

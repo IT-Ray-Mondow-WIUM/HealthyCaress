@@ -12,15 +12,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-5">
-            <div class="card border border-dark">
-                <div class="card-header text-center">
-                    {{ __('Login') }}
+            <div class="card border border-success">
+                <div class="card-header text-center bg-success bg-gradient">
+                    <b>{{ __('Login') }}</b>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="mb-3">
-                            <label for="email">{{ __('Email Address')
+                            <label for="email" class="text-success">{{ __('Email Address')
                                 }}</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                                 name="email" value="{{ old('email') }}" required autocomplete="email" autofocus
@@ -32,7 +32,7 @@
                             @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="password">{{ __('Password')
+                            <label for="password" class="text-success">{{ __('Password')
                                 }}</label>
                             <input id="password" type="password"
                                 class="form-control @error('password') is-invalid @enderror" name="password" required
@@ -53,6 +53,7 @@
                             </div>
                         </small>
                         <div class="d-flex justify-content-end">
+                            <a href="/" class="btn btn-danger me-1">Back</a>
                             <button type="submit" class="btn btn-primary">Send</button>
                         </div>
                     </form>
