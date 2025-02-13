@@ -42,6 +42,7 @@
 
         .sidebar a:hover {
             background: #495057;
+            border-radius: 15px;
         }
 
         /* Content harus bergeser jika sidebar terbuka */
@@ -52,6 +53,12 @@
 
         .content.full {
             margin-left: 0;
+        }
+
+        .active {
+            background-color: #040411;
+            margin: 0 3px 0 3px;
+            border-radius: 15px;
         }
 
         /* ===== MEDIA QUERY: Untuk tampilan mobile ===== */
@@ -73,8 +80,8 @@
 
 <body class="bg-light">
     <div class="sidebar bg-info border border-light" id="sidebar">
-        <a href="/home">Dashboard</a>
-        <a href="#">Profile</a>
+        <a href="{{ route('home') }}" class="@if(Request::is('home')) active @endif">Dashboard</a>
+        <a href="{{ route('profile') }}" class="@if(Request::is('profile')) active @endif">Profile</a>
         <a href="#">Patient</a>
         <a href="#">Practitioner</a>
         <a href="#">
