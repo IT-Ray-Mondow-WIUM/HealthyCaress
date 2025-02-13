@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(employee::class, 'employee_id');
     }
+
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class, 'user_id');
+    }
 }

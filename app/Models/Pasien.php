@@ -46,4 +46,11 @@ class Pasien extends Model
         'no_pasien_lama',
         'ihs',
     ];
+
+    protected $dates = ['deleted_at'];
+
+    public function registrations()
+    {
+        return $this->hasMany(Registration::class, 'patient_id');
+    }
 }
