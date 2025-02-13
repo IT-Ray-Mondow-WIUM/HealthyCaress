@@ -20,6 +20,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('username')->unique();
+            $table->softDeletes();
         });
     }
 
