@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Pasien extends Model
+{
+    use HasFactory, SoftDeletes;
+    protected $table = 'pasien';
+    protected $fillable = [
+        'nama',
+        'jenis_kelamin',
+        'tanggal_lahir',
+        'tempat_lahir',
+        'status_pernikahan',
+
+        'province_kode',
+        'city_kode',
+        'district_kode',
+        'village_kode',
+        'alamat',
+        'rt',
+        'rw',
+        'agama_id',
+        'pekerjaan_id',
+        'jenis_identitas',
+        'no_identitas',
+        'kewarganegaraan',
+
+        'jenis_pasien',
+        'nama_penanggung',
+        'hubungan_keluarga_id',
+        'telepon_penanggung',
+
+        'telepon_rumah',
+        'telepon_mobile',
+        'email',
+
+        'foto',
+        'user_id',
+
+        'no_rm',
+        'no_pasien_lama',
+        'ihs',
+    ];
+}

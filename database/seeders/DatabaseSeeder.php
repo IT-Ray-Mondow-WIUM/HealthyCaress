@@ -5,8 +5,12 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\employee;
+use App\Models\Family_Relation;
+use App\Models\Religion;
+use App\Models\satuSehatCredentials;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Works;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Hash;
@@ -20,21 +24,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'employee_id' => 1,
-            'email' => 'admin@mail.co.id',
-            'username' => 'admin',
-            'password' => Hash::make('123')
-        ]);
+        $this->call([
+            UserSeeders::class,
+            EmployeeSeeders::class,
+            SatuSehatSeeders::class,
 
-        employee::create([
-            'nip' => '0000000',
-            'nama' => 'Admin',
-            'jenis_kelamin' => 'l',
-            'tanggal_lahir' => Carbon::createFromFormat('d-m-Y', '09-08-1997')->format('Y-m-d'),
-            'no_telp' => '081234455667',
-            'agama' => 'Kristen',
-            'nik' => '1211232213317122',
+            ProvinceSeeders::class,
+            CitySeeders::class,
+            DistrictSeeders::class,
+            VillageSeeders::class,
+
+
+            // ReligionSeeders::class,
+            // WorkSeeders::class,
+            // FamilyRelationSeeders::class
         ]);
     }
 }
