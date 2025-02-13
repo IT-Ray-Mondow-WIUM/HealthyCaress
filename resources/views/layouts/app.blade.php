@@ -17,7 +17,7 @@
     <style>
         /* Sidebar Default Terbuka */
         .sidebar {
-            width: 200px;
+            width: 225px;
             height: 100vh;
             position: fixed;
             top: 0;
@@ -30,24 +30,25 @@
 
         /* Jika sidebar ditutup */
         .sidebar.hide {
-            left: -250px;
+            left: -225px;
         }
 
         .sidebar a {
-            color: white;
+            color: rgb(14, 2, 3);
             padding: 10px 15px;
             display: block;
             text-decoration: none;
         }
 
         .sidebar a:hover {
-            background: #495057;
+            background: #233342;
             border-radius: 15px;
+            color: whitesmoke;
         }
 
         /* Content harus bergeser jika sidebar terbuka */
         .content {
-            margin-left: 200px;
+            margin-left: 225px;
             transition: margin-left 0.3s;
         }
 
@@ -56,7 +57,7 @@
         }
 
         .active {
-            background-color: #040411;
+            background-color: #39718b;
             margin: 0 3px 0 3px;
             border-radius: 15px;
         }
@@ -79,18 +80,39 @@
 </head>
 
 <body class="bg-light">
-    <div class="sidebar bg-info border border-light" id="sidebar">
+    <div class="sidebar bg-info border border-light text-dark" id="sidebar">
         <a href="{{ route('home') }}" class="@if(Request::is('home')) active @endif">Dashboard</a>
         <a href="{{ route('profile') }}" class="@if(Request::is('profile')) active @endif">Profile</a>
+
+        <h6 class="border-dark border-bottom pb-1 ps-2 pt-3 fw-bolder">Main Menu</h6>
+        <a href="#">Registration</a>
+
+        <!-- Medical Services with Submenus -->
+        <div class="dropdown">
+            <a href="#" class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#medical-services">Medical
+                Services</a>
+            <div class="collapse" id="medical-services">
+                <a href="#" class="ps-4"><small>Outpatient</small></a> <!-- Rawat Jalan -->
+                <a href="#" class="ps-4"><small>Inpatient</small></a> <!-- Rawat Inap -->
+            </div>
+        </div>
+
+        <a href="#">Payment</a>
+        <a href="#">Pharmacy</a>
+
+        <h6 class="border-dark border-bottom pb-1 ps-2 pt-3 fw-bolder">Main Data</h6>
         <a href="#">Patient</a>
         <a href="#">Practitioner</a>
-        <a href="#">
+
+        <!-- Logout button should not be inside <a> -->
+        <div class="mt-3 px-3">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+                <button type="submit" class="btn btn-sm btn-danger w-100">Logout</button>
             </form>
-        </a>
+        </div>
     </div>
+
 
     <!-- Navbar -->
     <nav class="navbar bg-primary fixed-top">
