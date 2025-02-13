@@ -13,75 +13,7 @@
     {{--
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
     @vite(['resources/js/app.js'])
-    <style>
-        /* Sidebar Styling */
-        .sidebar {
-            width: 250px;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background: linear-gradient(135deg, #003973, #E5E5BE);
-            color: white;
-            padding-top: 75px;
-            transition: all 0.3s ease-in-out;
-            z-index: 1000;
-        }
-
-        .sidebar.hide {
-            left: -250px;
-        }
-
-        .sidebar a,
-        .dropdown-toggle {
-            color: white;
-            padding: 12px 20px;
-            display: block;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-
-        .sidebar a:hover,
-        .dropdown-toggle:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-        }
-
-        .active {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 10px;
-        }
-
-        /* Content Styling */
-        .content {
-            margin-left: 250px;
-            transition: margin-left 0.3s;
-        }
-
-        .content.full {
-            margin-left: 0;
-        }
-
-        /* Navbar Styling */
-        .navbar {
-            transition: all 0.3s ease-in-out;
-        }
-
-        /* Sidebar Responsiveness */
-        @media (max-width: 768px) {
-            .sidebar {
-                left: -250px;
-            }
-
-            .sidebar.show {
-                left: 0;
-            }
-
-            .content {
-                margin-left: 0;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 </head>
 
@@ -89,38 +21,47 @@
 
     <!-- Sidebar -->
     <div class="sidebar bg-info border-light" id="sidebar">
-        <a href="{{ route('home') }}" class="@if(Request::is('home')) active @endif">Dashboard</a>
-        <a href="{{ route('profile') }}" class="@if(Request::is('profile')) active @endif">Profile</a>
+        <a href="{{ route('home') }}" class="@if(Request::is('home')) active @endif">
+            <i class="bi bi-house-door"></i> Dashboard
+        </a>
+        <a href="{{ route('profile') }}" class="@if(Request::is('profile')) active @endif">
+            <i class="bi bi-person"></i> Profile
+        </a>
 
         <h6 class="border-bottom pb-1 ps-3 pt-3 fw-bolder">Main Menu</h6>
-        <a href="{{ route('registration') }}" class="@if(Request::is('registration')) active @endif">Registration</a>
+        <a href="{{ route('registration') }}" class="@if(Request::is('registration')) active @endif">
+            <i class="bi bi-card-checklist"></i> Registration
+        </a>
 
         <!-- Medical Services with Submenus -->
         <div class="dropdown">
             <a href="#" class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#medical-services">
-                Medical Services
+                <i class="bi bi-hospital"></i> Medical Services
             </a>
             <div class="collapse ps-3" id="medical-services">
-                <a href="#">Outpatient</a>
-                <a href="#">Inpatient</a>
+                <a href="#"><i class="bi bi-box-arrow-in-right"></i> Outpatient</a>
+                <a href="#"><i class="bi bi-hospital"></i> Inpatient</a>
             </div>
         </div>
 
-        <a href="#">Payment</a>
-        <a href="#">Pharmacy</a>
+        <a href="#"><i class="bi bi-cash-stack"></i> Payment</a>
+        <a href="#"><i class="bi bi-capsule"></i> Pharmacy</a>
 
         <h6 class="border-bottom pb-1 ps-3 pt-3 fw-bolder">Main Data</h6>
-        <a href="#">Patient</a>
-        <a href="#">Practitioner</a>
+        <a href="#"><i class="bi bi-people"></i> Patient</a>
+        <a href="#"><i class="bi bi-person-vcard"></i> Employee</a>
 
         <!-- Logout -->
         <div class="mt-3 px-3">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="btn btn-danger w-100">Logout</button>
+                <button type="submit" class="btn btn-danger w-100">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </button>
             </form>
         </div>
     </div>
+
 
     <!-- Navbar -->
     <nav class="navbar navbar-dark bg-primary fixed-top">
