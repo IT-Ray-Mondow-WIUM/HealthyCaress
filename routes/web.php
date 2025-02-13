@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\pages\profileController;
+use App\Http\Controllers\pages\registrationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -23,10 +25,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::prefix('profile')->middleware('auth')->group(function () {
     Route::get('', [profileController::class, 'index'])->name('profile');
+});
+
+Route::prefix('registration')->middleware('auth')->group(function () {
+    Route::get('', [registrationController::class, 'index'])->name('registration');
 });
 
 Route::post('/logout', function (Request $request) {
