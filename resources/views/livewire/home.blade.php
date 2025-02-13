@@ -7,11 +7,6 @@
     </style>
 
     <div class="container mt-2">
-        <!-- Grafik Utama -->
-        <div class="card p-3 mb-4">
-            <canvas id="mainChart" height="375"></canvas>
-        </div>
-
         <!-- 4 Kotak Informasi -->
         <div class="row">
             <div class="col-md-3">
@@ -38,6 +33,11 @@
                     <h3>{{ $ruang }}</h3>
                 </div>
             </div>
+        </div>
+
+        <!-- Grafik Utama -->
+        <div class="card p-3 mt-4">
+            <canvas id="mainChart" height="375"></canvas>
         </div>
     </div>
 

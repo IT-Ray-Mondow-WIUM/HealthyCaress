@@ -81,7 +81,7 @@
 <body class="bg-light">
     <div class="sidebar bg-info border border-light" id="sidebar">
         <a href="{{ route('home') }}" class="@if(Request::is('home')) active @endif">Dashboard</a>
-        <a href="#">Profile</a>
+        <a href="{{ route('profile') }}" class="@if(Request::is('profile')) active @endif">Profile</a>
         <a href="#">Patient</a>
         <a href="#">Practitioner</a>
         <a href="#">

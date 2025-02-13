@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\pages\profileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -23,6 +24,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::prefix('profile')->middleware('auth')->group(function () {
+    Route::get('', [profileController::class, 'index'])->name('profile');
+});
 
 Route::post('/logout', function (Request $request) {
     Auth::logout();
