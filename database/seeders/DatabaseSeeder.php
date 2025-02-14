@@ -5,7 +5,6 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\employee;
-use App\Models\Family_Relation;
 use App\Models\Religion;
 use App\Models\satuSehatCredentials;
 use Illuminate\Database\Seeder;
@@ -35,9 +34,9 @@ class DatabaseSeeder extends Seeder
             VillageSeeders::class,
 
 
-            // ReligionSeeders::class,
-            // WorkSeeders::class,
-            // FamilyRelationSeeders::class
+            ReligionSeeders::class,
+            WorkSeeders::class,
+            familyRelationSeeders::class
         ]);
     }
 }
