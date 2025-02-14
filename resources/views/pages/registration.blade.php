@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Registration')
 @section('content')
-<div class="container mt-2">
+<div class="container-fluid mt-2">
     <style>
         /* Efek transisi halus */
         .nav-tabs .nav-link {
@@ -28,7 +28,7 @@
         }
     </style>
 
-    <div class="container mt-4">
+    <div class=" mt-4">
         <ul class="nav nav-tabs" id="mainTab" role="tablist">
             <!-- Tab Pasien Lama -->
             <li class="nav-item" role="presentation">
@@ -42,14 +42,14 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="old-patient-tab" data-bs-toggle="tab" data-bs-target="#old-patient"
                     type="button" role="tab" aria-controls="old-patient" aria-selected="true">
-                    Old Patient
+                    <i class="bi bi-plus-circle-fill"></i> Add Old Patient
                 </button>
             </li>
             <!-- Tab Pasien Baru -->
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="new-patient-tab" data-bs-toggle="tab" data-bs-target="#new-patient"
                     type="button" role="tab" aria-controls="new-patient" aria-selected="false">
-                    New Patient
+                    <i class="bi bi-plus-circle-fill"></i> Add New Patient
                 </button>
             </li>
         </ul>
@@ -58,7 +58,32 @@
             <!-- Konten Pasien Lama -->
             <div class="tab-pane fade show active" id="list-patient" role="tabpanel" aria-labelledby="list-patient-tab">
                 <div class="card p-3">
-                    <h4>List Pasien</h4>
+                    <table class="table table-striped table-hovered">
+                        <thead class="table-info">
+                            <tr class="text-center">
+                                <th scope='col'>No</th>
+                                <th scope='col'>Nama</th>
+                                <th scope='col'>Tanggal</th>
+                                <th scope='col'>IHS</th>
+                                <th scope='col'>Alamat</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($registration as $key=>$list)
+                            <tr>
+                                <td scope='col'>{{ $key+1 }}</td>
+                                <td scope='col'>{{ $item->pasien_id }}</td>
+                                <td scope='col'></td>
+                                <td scope='col'></td>
+                                <td scope='col'></td>
+                            </tr>
+                            @empty
+                            <tr class="text-center">
+                                <td colspan="5">Tidak Ada Data</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <!-- Konten Pasien Lama -->
@@ -69,7 +94,7 @@
             <!-- Konten Pasien Baru -->
             <div class="tab-pane fade" id="new-patient" role="tabpanel" aria-labelledby="new-patient-tab">
                 <div class="card p-3">
-                    <h5>New Patient Information</h5>
+                    <livewire:Registration.NewPatientForm />
                 </div>
             </div>
         </div>
