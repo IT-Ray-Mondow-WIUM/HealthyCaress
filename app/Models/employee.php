@@ -19,7 +19,8 @@ class employee extends Model
         'tanggal_lahir',
         'no_telp',
         'agama',
-        'nik'
+        'nik',
+        'position_id'
     ];
 
     public function user(): HasOne
@@ -30,5 +31,10 @@ class employee extends Model
     public function doctor()
     {
         return $this->hasOne(Doctor::class, 'employee_id');
+    }
+
+    public function position()
+    {
+        return $this->belongsTo(Position::class);
     }
 }

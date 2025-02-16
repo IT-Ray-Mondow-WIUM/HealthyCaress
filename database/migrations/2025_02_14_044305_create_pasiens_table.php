@@ -17,14 +17,14 @@ return new class extends Migration
             $table->string('nama');
             $table->enum('jenis_kelamin', ['l', 'p']);
             $table->date('tanggal_lahir')->nullable();
-            $table->date('tempat_lahir')->nullable();
+            $table->string('tempat_lahir')->nullable();
             $table->string('status_pernikahan')->default('belum menikah');
 
             // Kependudukan
-            $table->foreignId('province_kode')->nullable()->constrained('provinces');
-            $table->foreignId('city_kode')->nullable()->constrained('cities');
-            $table->foreignId('district_kode')->nullable()->constrained('districts');
-            $table->foreignId('village_kode')->nullable()->constrained('villages');
+            $table->integer('province_kode');
+            $table->integer('city_kode');
+            $table->bigInteger('district_kode');
+            $table->bigInteger('village_kode');
             $table->text('alamat')->nullable();
             $table->string('rt')->nullable();
             $table->string('rw')->nullable();
@@ -46,13 +46,14 @@ return new class extends Migration
             $table->string('email')->nullable();
 
             //foto
-            $table->string('foto')->nullable();
-            $table->foreignId('user_id')->constrained();
+            $table->string('no_kartu')->nullable();
+            $table->foreignId('user_id')->constrained('users');
 
             //id
             $table->string('no_rm')->nullable();
             $table->string('no_pasien_lama')->nullable();
             $table->string('ihs')->nullable();
+            $table->string('images')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('employee_id')->nullable()->constrained('employee');
             $table->string('ihs')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
