@@ -1,5 +1,4 @@
 <div class="container-fluid mt-4">
-    {{-- <p>{{ $formData['provinsi'] }}</p> --}}
     <!-- Progress Bar -->
     <div class="progress mb-3 text-center" style="height: 15px;">
         <div class="progress-bar" role="progressbar" style="width: {{ ($steps / 3) * 100 }}%;"
@@ -7,9 +6,99 @@
     </div>
 
     <!-- Konten Berdasarkan Step -->
-    @if ($steps == 1)
+    @if ($steps == 3)
+    <table class="table table-striped table-sm">
+        <thead class="table-secondary">
+            <tr>
+                <td><b>Registration</b> >> <b>Service</b></td>
+            </tr>
+        </thead>
+    </table>
+    <livewire:Registration.ServicePatientForm />
+    <div class="text-end">
+        <button type="button" class="btn btn-danger btn-sm" wire:click="kembali">
+            <i class="bi bi-arrow-left-circle"></i> Back</button>
+        <button type="button" @if (!$selectedClinicId || !$selectedDoctorId) disabled @endif
+            class="btn btn-primary btn-sm" wire:click="submit">Submit <i class="bi bi-check-circle"></i></button>
+    </div>
+    @elseif ($steps == 2)
+    <table class="table table-striped table-sm">
+        <thead class="table-secondary">
+            <tr>
+                <td><b>Registration</b> >> <b>Image</b></td>
+            </tr>
+        </thead>
+    </table>
+    <div class="row">
+        <!-- Kolom Kamera -->
+        <div class="col-md-6 text-center border border-dark">
+            <small>Take Picture</small>
+            <div x-data="{ 
+                capture() { 
+                    let canvas = this.$refs.canvas; 
+                    let video = this.$refs.video; 
+                    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height); 
+                    this.saveImage(canvas.toDataURL('image/png'));
+                },
+                saveImage(dataUrl) {
+                    fetch(dataUrl)
+                        .then(res => res.blob())
+                        .then(blob => {
+                            let file = new File([blob], 'photo.png', { type: 'image/png' });
+                            @this.upload('photo', file, (uploadedFilename) => {
+                                console.log('Photo uploaded:', uploadedFilename);
+                                @this.dispatch('photoCaptured', uploadedFilename);
+                            }, (error) => {
+                                console.error('Upload failed:', error);
+                            });
+                        });
+                }
+            }" x-init="
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(stream => { $refs.video.srcObject = stream; })
+                    .catch(error => alert('Gagal mengakses kamera'));
+            ">
+
+                <video x-ref="video" class=" border rounded" autoplay playsinline
+                    style="max-width: 75%; height:325px;"></video>
+                <canvas x-ref="canvas" class="d-none"></canvas>
+                <div>
+                    <button @click="capture" class="btn btn-success my-2">Ambil Foto</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kolom Hasil Foto -->
+        <div class="col-md-6 text-center border border-dark">
+            <small>Preview</small>
+            <div>
+                @if ($photo)
+                <img src="{{ $photo->temporaryUrl() }}" class="img-thumbnail" style="max-width: 75%; height:325px;">
+                @else
+                <img src="{{ asset('images/people.jpg') }}" class="img-thumbnail" style="max-width: 75%; height:325px;">
+                @endif
+            </div>
+        </div>
+    </div>
+    <div class="text-end mt-3">
+        <button type="button" class="btn btn-danger btn-sm" wire:click="kembali">
+            <i class="bi bi-arrow-left-circle"></i> Back
+        </button>
+        <button type="button" class="btn btn-info btn-sm" wire:click="savePhoto">Next
+            {{-- @if (!$photo) disabled @endif --}}
+            <i class="bi bi-arrow-right-circle"></i>
+        </button>
+    </div>
+
+    @else
+    <table class="table table-striped table-sm">
+        <thead class="table-secondary">
+            <tr>
+                <td><b>Registration</b> >> <b>Forms</b></td>
+            </tr>
+        </thead>
+    </table>
     <form wire:submit='savedData'>
-        {{-- wire:submit='collectData' --}}
         <table class="table table-borderless table-lg table-responsive">
             <thead class="table-secondary">
                 <tr class="border border-bottom">
@@ -286,29 +375,38 @@
                 </tr>
             </tbody>
         </table>
+
         <div class="text-end">
-            <button type="submit" class="btn btn-md btn-info">Lanjut
-                <i class="bi bi-arrow-right-square"></i>
+            <button type="submit" class="btn btn-sm btn-info">Next
+                {{-- @if (empty($containData)) disabled @endif --}}
+                <i class="bi bi-arrow-right-circle"></i>
             </button>
         </div>
     </form>
-    @elseif ($steps == 2)
-    <h5 class="text-center">Step 2: Upload Foto</h5>
-    <p>Silakan unggah foto pasien.</p>
-    <div class="text-end">
-        <button type="button" class="btn btn-danger" wire:click="kembali"><i class="bi bi-arrow-left"></i>
-            Kembali</button>
-        <button type="button" class="btn btn-info" wire:click="savePhoto">Lanjut <i
-                class="bi bi-arrow-right"></i></button>
-    </div>
-    @else
-    <h5 class="text-center">Step 3: Tindakan</h5>
-    <p>Silakan pilih tindakan medis.</p>
-    <div class="text-end">
-        <button type="button" class="btn btn-danger" wire:click="kembali"><i class="bi bi-arrow-left"></i>
-            Kembali</button>
-        <button type="button" class="btn btn-primary" wire:click="submit">Selesai <i
-                class="bi bi-check-circle"></i></button>
-    </div>
     @endif
+    <!-- Notifikasi Toast -->
+    <div id="toast-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1050"></div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        window.addEventListener('show-toast', event => {
+            let type = event.detail.type; // success or error
+            let message = event.detail.message;
+
+            let toastHtml = `
+                <div class="toast align-items-center text-white bg-${type === 'success' ? 'success' : 'danger'} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">${message}</div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </div>`;
+
+            let toastContainer = document.getElementById('toast-container');
+            toastContainer.innerHTML = toastHtml;
+
+            let toast = new bootstrap.Toast(toastContainer.querySelector('.toast'));
+            toast.show();
+        });
+    });
+</script>

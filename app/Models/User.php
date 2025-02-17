@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Registration::class, 'user_id');
     }
+
+    public function pasien()
+    {
+        return $this->hasMany(Pasien::class, 'user_id');
+    }
 }

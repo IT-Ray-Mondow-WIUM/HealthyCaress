@@ -25,18 +25,21 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeders::class,
+            PositionSeeders::class,
             EmployeeSeeders::class,
             SatuSehatSeeders::class,
 
-            ProvinceSeeders::class,
-            CitySeeders::class,
-            DistrictSeeders::class,
-            VillageSeeders::class,
-
+            // ProvinceSeeders::class,
+            // CitySeeders::class,
+            // DistrictSeeders::class,
+            // VillageSeeders::class,
 
             ReligionSeeders::class,
             WorkSeeders::class,
-            familyRelationSeeders::class
+            familyRelationSeeders::class,
+
+            ClinicServiceSeeders::class,
+            DoctorSeeders::class
         ]);
     }
 }

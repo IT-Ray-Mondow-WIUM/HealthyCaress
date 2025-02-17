@@ -20,5 +20,19 @@ class UserSeeders extends Seeder
             'username' => 'admin',
             'password' => Hash::make('123')
         ]);
+
+        User::create([
+            'employee_id' => 2,
+            'email' => 'dokterumum@mail.co.id',
+            'username' => 'dokterumum',
+            'password' => Hash::make('123')
+        ]);
+
+        User::create([
+            'employee_id' => 3,
+            'email' => 'doktergigi@mail.co.id',
+            'username' => 'doktergigi',
+            'password' => Hash::make('123')
+        ]);
     }
 }

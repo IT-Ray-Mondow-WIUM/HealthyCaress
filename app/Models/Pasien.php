@@ -39,12 +39,13 @@ class Pasien extends Model
         'telepon_mobile',
         'email',
 
-        'foto',
+        'no_kartu',
         'user_id',
 
         'no_rm',
         'no_pasien_lama',
         'ihs',
+        'images',
     ];
 
     protected $dates = ['deleted_at'];
@@ -52,5 +53,9 @@ class Pasien extends Model
     public function registrations()
     {
         return $this->hasMany(Registration::class, 'patient_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

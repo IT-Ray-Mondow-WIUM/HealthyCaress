@@ -57,8 +57,8 @@
         <div class="tab-content mt-3" id="mainTabContent">
             <!-- Konten Pasien Lama -->
             <div class="tab-pane fade show active" id="list-patient" role="tabpanel" aria-labelledby="list-patient-tab">
-                <div class="card p-3">
-                    <table class="table table-striped table-hovered">
+                <div class="container-fluid p-1" style="overflow-x: auto;">
+                    <table class="table table-striped table-hovered table-bordered table-sm">
                         <thead class="table-info">
                             <tr class="text-center">
                                 <th scope='col'>No</th>
@@ -72,10 +72,10 @@
                             @forelse ($registration as $key=>$list)
                             <tr>
                                 <td scope='col'>{{ $key+1 }}</td>
-                                <td scope='col'>{{ $item->pasien_id }}</td>
-                                <td scope='col'></td>
-                                <td scope='col'></td>
-                                <td scope='col'></td>
+                                <td scope='col'>{{ $list->patient->nama }}</td>
+                                <td scope='col'>{{ $list->created_at->format('Y-m-d') }}</td>
+                                <td scope='col'>{{ $list->patient->ihs }}</td>
+                                <td scope='col'>{{ $list->patient->alamat }}</td>
                             </tr>
                             @empty
                             <tr class="text-center">

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('no_telp')->nullable();
             $table->string('agama')->nullable();
             $table->string('nik')->nullable();
-            // $table->foreignId('jabatan_id')->nullable()->constrained('jabatan');
+            $table->foreignId('position_id')->constrained('position');
 
             $table->timestamps();
             $table->softDeletes();
