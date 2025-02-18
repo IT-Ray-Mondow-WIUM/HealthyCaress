@@ -5,6 +5,8 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 
 class KlinikController extends Controller
 {
@@ -33,19 +35,12 @@ class KlinikController extends Controller
 
     public function requestToken()
     {
-        $client = new Client();
-
-        try {
-            $response = $client->request('POST', 'http://127.0.0.1:8080/api/get-token', [
-                'json' => [
-                    'client_id'     => env('SATUSEHAT_CLIENT_ID'),
-                    'client_secret' => env('SATUSEHAT_CLIENT_SECRET'),
-                ],
-            ]);
-
-            return response()->json(json_decode($response->getBody(), true));
-        } catch (\Exception $e) {
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
+        $response = Http::asForm()->post('http://127.0.0.1:8080/api/get-token', [
+            'user_name' => 'Admin',
+            'password' => Hash::make('123'),
+            'client_id'     => env('SATUSEHAT_CLIENT_ID'),
+            'client_secret' => env('SATUSEHAT_CLIENT_SECRET'),
+        ]);
+        return $response->json();
     }
 }

@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::post('/send-to-bridge', [KlinikController::class, 'sendToBridge']);
 Route::post('/request-token', [KlinikController::class, 'requestToken']);
+Route::get('/request-token', [KlinikController::class, 'requestToken']);
