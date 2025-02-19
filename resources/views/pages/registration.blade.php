@@ -57,29 +57,41 @@
         <div class="tab-content mt-3" id="mainTabContent">
             <!-- Konten Pasien Lama -->
             <div class="tab-pane fade show active" id="list-patient" role="tabpanel" aria-labelledby="list-patient-tab">
-                <div class="container-fluid p-1" style="overflow-x: auto;">
+                <div class="container p-1" style="overflow-x: auto;">
                     <table class="table table-striped table-hovered table-bordered table-sm">
+                        <thead class="table-light">
+                            <tr>
+                                <th colspan="7">Patient Registration List</th>
+                            </tr>
+                        </thead>
                         <thead class="table-info">
                             <tr class="text-center">
                                 <th scope='col'>No</th>
                                 <th scope='col'>Nama</th>
                                 <th scope='col'>Tanggal</th>
-                                <th scope='col'>IHS</th>
                                 <th scope='col'>Alamat</th>
+                                <th scope='col'>Jenis Pasien</th>
+                                <th scope='col'>Poliklinik</th>
+                                <th scope='col'>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @forelse ($registration as $key=>$list)
                             <tr>
-                                <td scope='col'>{{ $key+1 }}</td>
-                                <td scope='col'>{{ $list->patient->nama }}</td>
-                                <td scope='col'>{{ $list->created_at->format('Y-m-d') }}</td>
-                                <td scope='col'>{{ $list->patient->ihs }}</td>
-                                <td scope='col'>{{ $list->patient->alamat }}</td>
+                                <td class="text-center">{{ $key+1 }}.</td>
+                                <td>{{ $list->patient->nama }}</td>
+                                <td class="text-center">{{ $list->created_at->format('d M, Y') }}</td>
+                                <td>{{ $list->patient->alamat }}</td>
+                                <td>Pasien {{ $list->jenis_pasien }}</td>
+                                <td class="text-center">{{ ucfirst($list->clinic->name) }}</td>
+                                <td class="text-center">
+                                    <button class="btn btn-primary"><i class="bi bi-eye"></i></button>
+                                    <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                                </td>
                             </tr>
                             @empty
                             <tr class="text-center">
-                                <td colspan="5">Tidak Ada Data</td>
+                                <td colspan="7">Tidak Ada Data</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -88,14 +100,12 @@
             </div>
             <!-- Konten Pasien Lama -->
             <div class="tab-pane fade show" id="old-patient" role="tabpanel" aria-labelledby="old-patient-tab">
-                <livewire:Registration.SearchPatient />
+                <livewire:Registration.OldPatientForm />
             </div>
 
             <!-- Konten Pasien Baru -->
             <div class="tab-pane fade" id="new-patient" role="tabpanel" aria-labelledby="new-patient-tab">
-                <div class="card p-3">
-                    <livewire:Registration.NewPatientForm />
-                </div>
+                <livewire:Registration.NewPatientForm />
             </div>
         </div>
     </div>

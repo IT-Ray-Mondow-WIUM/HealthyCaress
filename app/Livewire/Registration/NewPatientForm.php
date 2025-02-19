@@ -212,7 +212,7 @@ class NewPatientForm extends Component
             'no_identitas' => $data['no_identitas'],
             'kewarganegaraan' => $data['kewarganegaraan'],
 
-            'jenis_pasien' => $data['no_pasien_lama'] ?? 'Baru',
+            'jenis_pasien' => $data['no_pasien_lama'] == null ? 'Baru' : 'Lama',
             'nama_penanggung' => $data['nama_penanggung'],
             'hubungan_keluarga_id' => $data['hubungan_keluarga_id'],
             'telepon_penanggung' => $data['telepon_penanggung'],
