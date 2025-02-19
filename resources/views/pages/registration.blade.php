@@ -66,7 +66,7 @@
                         </thead>
                         <thead class="table-info">
                             <tr class="text-center">
-                                <th scope='col'>No</th>
+                                <th scope='col'>No Kartu</th>
                                 <th scope='col'>Nama</th>
                                 <th scope='col'>Tanggal</th>
                                 <th scope='col'>Alamat</th>
@@ -78,7 +78,7 @@
                         <tbody>
                             @forelse ($registration as $key=>$list)
                             <tr>
-                                <td class="text-center">{{ $key+1 }}.</td>
+                                <td class="text-center">{{ $list->patient->no_kartu }}.</td>
                                 <td>{{ $list->patient->nama }}</td>
                                 <td class="text-center">{{ $list->created_at->format('d M, Y') }}</td>
                                 <td>{{ $list->patient->alamat }}</td>
