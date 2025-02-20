@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\pages\patientController;
 use App\Http\Controllers\pages\profileController;
 use App\Http\Controllers\pages\registrationController;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,10 @@ Route::prefix('profile')->middleware('auth')->group(function () {
 
 Route::prefix('registration')->middleware('auth')->group(function () {
     Route::get('', [registrationController::class, 'index'])->name('registration');
+});
+
+Route::prefix('patient')->middleware('auth')->group(function () {
+    Route::get('', [patientController::class, 'index'])->name('patient');
 });
 
 Route::post('/logout', function (Request $request) {

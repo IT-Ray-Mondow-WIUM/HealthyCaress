@@ -25,4 +25,9 @@ class villages extends Model
     {
         return $this->belongsTo(districts::class, 'district_kode');
     }
+
+    public function patient()
+    {
+        return $this->hasMany(Pasien::class, 'village_kode', 'kode');
+    }
 }
