@@ -29,4 +29,8 @@ class cities extends Model
     {
         return $this->hasMany(districts::class, 'kode');
     }
+    public function patient()
+    {
+        return $this->hasMany(Pasien::class, 'city_kode', 'kode');
+    }
 }

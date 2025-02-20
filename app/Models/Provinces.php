@@ -25,4 +25,9 @@ class Provinces extends Model
     {
         return $this->hasMany(cities::class, 'kode');
     }
+
+    public function patient()
+    {
+        return $this->hasMany(Pasien::class, 'province_kode', 'kode');
+    }
 }

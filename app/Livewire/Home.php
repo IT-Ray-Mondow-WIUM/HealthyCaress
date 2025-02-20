@@ -2,6 +2,9 @@
 
 namespace App\Livewire;
 
+use App\Models\Clinic;
+use App\Models\Doctor;
+use App\Models\Pasien;
 use Livewire\Component;
 
 class Home extends Component
@@ -10,14 +13,27 @@ class Home extends Component
 
     public function mount()
     {
-        $this->pasien = 1250;
-        $this->dokter = 50;
-        $this->poliklinik = 15;
-        $this->ruang = 35;
+        $this->pasien = $this->countPatients();
+        $this->dokter = $this->countDoctors();
+        $this->poliklinik = $this->countClinics();
+        $this->ruang = 0;
     }
 
     public function render()
     {
         return view('livewire.home');
+    }
+
+    private function countPatients()
+    {
+        return Pasien::count();
+    }
+    private function countDoctors()
+    {
+        return Doctor::count();
+    }
+    private function countClinics()
+    {
+        return Clinic::count();
     }
 }

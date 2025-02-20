@@ -30,4 +30,9 @@ class districts extends Model
     {
         return $this->hasMany(villages::class, 'kode');
     }
+
+    public function patient()
+    {
+        return $this->hasMany(Pasien::class, 'district_kode', 'kode');
+    }
 }

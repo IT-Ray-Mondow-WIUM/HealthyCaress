@@ -58,4 +58,20 @@ class Pasien extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function province()
+    {
+        return $this->belongsTo(Provinces::class, 'province_kode', 'kode');
+    }
+    public function city()
+    {
+        return $this->belongsTo(Cities::class, 'city_kode', 'kode');
+    }
+    public function district()
+    {
+        return $this->belongsTo(Districts::class, 'district_kode', 'kode');
+    }
+    public function village()
+    {
+        return $this->belongsTo(Villages::class, 'village_kode', 'kode');
+    }
 }

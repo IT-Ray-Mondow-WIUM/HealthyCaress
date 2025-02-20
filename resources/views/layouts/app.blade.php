@@ -48,7 +48,8 @@
         <a href="#"><i class="bi bi-capsule"></i> Pharmacy</a>
 
         <h6 class="border-bottom pb-1 ps-3 pt-3 fw-bolder">Main Data</h6>
-        <a href="#"><i class="bi bi-people"></i> Patient</a>
+        <a href="{{ route('patient') }}" class="@if(Request::is('patient')) active @endif"><i class="bi bi-people"></i>
+            Patient</a>
         <a href="#"><i class="bi bi-person-vcard"></i> Employee</a>
 
         <!-- Logout -->
