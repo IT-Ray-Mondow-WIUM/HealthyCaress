@@ -30,7 +30,9 @@
                         <td>{{ $item->no_kartu }}</td>
                         <td>{{ $item->telepon_mobile }}</td>
                         <td style="white-space: nowrap;">
-                            <button type="button" class="btn btn-sm btn-info"><i class="bi bi-pencil-fill"></i></button>
+                            <a href="{{ route('patient.edit', ['id' => $item->id]) }}" class="btn btn-sm btn-info">
+                                <i class="bi bi-pencil-fill"></i>
+                            </a>
                             <button type="button" class="btn btn-sm btn-danger text-light"><i
                                     class="bi bi-trash-fill"></i></button>
                         </td>

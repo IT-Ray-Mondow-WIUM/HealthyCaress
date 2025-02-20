@@ -38,6 +38,7 @@ Route::prefix('registration')->middleware('auth')->group(function () {
 
 Route::prefix('patient')->middleware('auth')->group(function () {
     Route::get('', [patientController::class, 'index'])->name('patient');
+    Route::get('/edit/{id}', [patientController::class, 'edit'])->name('patient.edit');
 });
 
 Route::post('/logout', function (Request $request) {

@@ -13,4 +13,9 @@ class patientController extends Controller
         $getPatient = Pasien::orderBy('nama')->get();
         return view('pages.patient', ['pasien' => $getPatient]);
     }
+
+    public function edit($id)
+    {
+        dd($id);
+    }
 }
