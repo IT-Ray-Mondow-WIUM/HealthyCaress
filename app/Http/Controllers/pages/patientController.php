@@ -16,6 +16,7 @@ class patientController extends Controller
 
     public function edit($id)
     {
-        dd($id);
+        $pasien = Pasien::find($id);
+        return view('patient.edit', ['patient' => $pasien]);
     }
 }

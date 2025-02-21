@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Healthy Clinic</title>
+    <title>Healthy Cares</title>
     <link rel="icon" href="{{ asset('images/images1.jpg') }}" type="image/x-icon">
 
     <!-- Bootstrap CSS -->
@@ -98,7 +98,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="#">Healthy Clinic</a>
+            <a class="navbar-brand fw-bold" href="#">Healthy Cares</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -128,7 +128,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-content">
-            <h1 class="display-4 fw-bold" data-aos="fade-up">Welcome to Healthy Clinic</h1>
+            <h1 class="display-4 fw-bold" data-aos="fade-up">Welcome to Healthy Cares</h1>
             <p class="lead" data-aos="fade-up" data-aos-delay="300">Your trusted partner for better health</p>
             <a href="#about" class="btn btn-light text-success btn-animated mt-3" data-aos="fade-up"
                 data-aos-delay="500">Learn More</a>
@@ -144,7 +144,7 @@
             </div>
             <div class="col-md-6" data-aos="fade-left">
                 <h2>About Us</h2>
-                <p>Healthy Clinic is committed to providing the best healthcare services. Our team of professional
+                <p>Healthy Cares is committed to providing the best healthcare services. Our team of professional
                     doctors is here to help you stay healthy.</p>
             </div>
         </div>
@@ -193,13 +193,13 @@
     <section id="contact" class="container my-5 text-center">
         <h2 data-aos="fade-up">Contact Us</h2>
         <p data-aos="fade-up" data-aos-delay="200">Have any questions? Feel free to reach out.</p>
-        <a href="mailto:info@healthyclinic.com" class="btn btn-success btn-animated" data-aos="fade-up"
+        <a href="mailto:info@healthyCares.com" class="btn btn-success btn-animated" data-aos="fade-up"
             data-aos-delay="400">Email Us</a>
     </section>
 
     <!-- Footer -->
     <footer class="bg-success text-white text-center py-3">
-        <p>© 2025 Healthy Clinic. All Rights Reserved.</p>
+        <p>© 2025 Healthy Cares. All Rights Reserved.</p>
     </footer>
 
     <!-- Bootstrap & AOS JS -->
