@@ -48,7 +48,7 @@
         <a href="#"><i class="bi bi-capsule"></i> Pharmacy</a>
 
         <h6 class="border-bottom pb-1 ps-3 pt-3 fw-bolder">Main Data</h6>
-        <a href="{{ route('patient') }}" class="@if(Request::is('patient')) active @endif"><i class="bi bi-people"></i>
+        <a href="{{ route('patient') }}" class="@if(Request::is('patient*')) active @endif"><i class="bi bi-people"></i>
             Patient</a>
         <a href="#"><i class="bi bi-person-vcard"></i> Employee</a>
 
@@ -68,7 +68,7 @@
     <nav class="navbar navbar-dark bg-primary fixed-top">
         <div class="container-fluid">
             <button class="btn btn-outline-light" id="sidebarToggle">☰ Menu</button>
-            <a class="navbar-brand mx-auto fw-bold" href="#">Healthy Clinic</a>
+            <a class="navbar-brand mx-auto fw-bold" href="#">Healthy Cares</a>
         </div>
     </nav>
 
