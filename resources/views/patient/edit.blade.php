@@ -104,8 +104,13 @@
         <!-- Tab Content -->
         <div class="tab-content mt-3" id="myTabsContent">
             <div class="tab-pane fade show active" id="tab1" role="tabpanel">
-                <h4>Content for Tab 1</h4>
-                <p>This is the content inside the first tab. It is fully responsive!</p>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
             <div class="tab-pane fade" id="tab2" role="tabpanel">
                 <h4>Content for Tab 2</h4>
