@@ -104,13 +104,36 @@
         <!-- Tab Content -->
         <div class="tab-content mt-3" id="myTabsContent">
             <div class="tab-pane fade show active" id="tab1" role="tabpanel">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Tanggal</th>
-                        </tr>
-                    </thead>
-                </table>
+                <div class="container-fluid table-responsive">
+                    <table class="table table-hover table-bordered table-striped table-sm">
+                        <thead class="table-secondary">
+                            <tr class="text-center">
+                                <th>Tanggal</th>
+                                <th>Poli</th>
+                                <th>Dokter</th>
+                                <th>Jenis Pendaftaran</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($registration as $item)
+                            <tr>
+                                <td>{{ $item->tanggal }}</td>
+                                <td>{{ ucfirst($item->clinic->name) }}</td>
+                                <td>{{ $item->doctor->employee->nama }}</td>
+                                <td>{{ $item->jenis_pendaftaran }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-info text-dark">
+                                        <i class="bi bi-eye-fill"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            @empty
+
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="tab-pane fade" id="tab2" role="tabpanel">
                 <h4>Content for Tab 2</h4>
