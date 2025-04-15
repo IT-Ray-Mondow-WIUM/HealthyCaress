@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\pages\employeeController;
 use App\Http\Controllers\pages\patientController;
 use App\Http\Controllers\pages\profileController;
 use App\Http\Controllers\pages\registrationController;
@@ -39,6 +40,10 @@ Route::prefix('registration')->middleware('auth')->group(function () {
 Route::prefix('patient')->middleware('auth')->group(function () {
     Route::get('', [patientController::class, 'index'])->name('patient');
     Route::get('/edit/{id}', [patientController::class, 'edit'])->name('patient.edit');
+});
+
+Route::prefix('employee')->middleware('auth')->group(function () {
+    Route::get('', [employeeController::class, 'index'])->name('employee');
 });
 
 Route::post('/logout', function (Request $request) {
