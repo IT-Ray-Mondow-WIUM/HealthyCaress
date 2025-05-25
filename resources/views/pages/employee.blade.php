@@ -3,10 +3,19 @@
 @section('content')
 <div class="mt-2">
     <h4>Halaman Pegawai</h4>
+    <hr>
+    <div class="d-flex flex-row-reverse">
+        <div class="p-2">
+            <div class="input-group">
+                <input type="text" class="form-control border border-primary" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default" placeholder="Cari Pegawai ...">
+            </div>
+        </div>
+    </div>
 
-    <div class="container-fluid border border-primary py-1 table-responsive" style="height: 525px;">
-        <table class="table table-striped table-bordered table-sm">
-            <thead class="text-center">
+    <div class="container-fluid py-1 table-responsive" style="height: 525px;">
+        <table class="table table-striped table-bordered table-hover table-lg">
+            <thead class="text-center table-primary">
                 <tr>
                     <th>NIP</th>
                     <th>Nama</th>
@@ -16,7 +25,7 @@
                     <th>#</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-dark">
                 @foreach ($pegawai as $employee)
                 <tr>
                     <td>{{ $employee->nip }}</td>
