@@ -50,7 +50,8 @@
         <h6 class="border-bottom pb-1 ps-3 pt-3 fw-bolder">Main Data</h6>
         <a href="{{ route('patient') }}" class="@if(Request::is('patient*')) active @endif"><i class="bi bi-people"></i>
             Patient</a>
-        <a href="#"><i class="bi bi-person-vcard"></i> Employee</a>
+        <a href="{{ route('employee') }}" class="@if(Request::is('employee*')) active @endif"><i
+                class="bi bi-person-vcard"></i> Employee</a>
 
         <!-- Logout -->
         <div class="mt-3 px-3">
