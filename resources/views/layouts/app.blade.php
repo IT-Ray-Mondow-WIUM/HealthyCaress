@@ -52,6 +52,8 @@
             Patient</a>
         <a href="{{ route('employee') }}" class="@if(Request::is('employee*')) active @endif"><i
                 class="bi bi-person-vcard"></i> Employee</a>
+        <a href="{{ route('position') }}" class="@if(Request::is('position*')) active @endif"><i
+                class="bi bi-person-lines-fill"></i> Position</a>
 
         <!-- Logout -->
         <div class="mt-3 px-3">

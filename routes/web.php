@@ -3,8 +3,10 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\pages\employeeController;
 use App\Http\Controllers\pages\patientController;
+use App\Http\Controllers\pages\positionController;
 use App\Http\Controllers\pages\profileController;
 use App\Http\Controllers\pages\registrationController;
+use App\Models\position;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -44,6 +46,9 @@ Route::prefix('patient')->middleware('auth')->group(function () {
 
 Route::prefix('employee')->middleware('auth')->group(function () {
     Route::get('', [employeeController::class, 'index'])->name('employee');
+});
+Route::prefix('position')->middleware('auth')->group(function () {
+    Route::get('', [positionController::class, 'index'])->name('position');
 });
 
 Route::post('/logout', function (Request $request) {
