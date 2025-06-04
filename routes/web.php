@@ -46,6 +46,7 @@ Route::prefix('patient')->middleware('auth')->group(function () {
 
 Route::prefix('employee')->middleware('auth')->group(function () {
     Route::get('', [employeeController::class, 'index'])->name('employee');
+    Route::post('', [employeeController::class, 'store'])->name('employee.add');
 });
 Route::prefix('position')->middleware('auth')->group(function () {
     Route::get('', [positionController::class, 'index'])->name('position');
