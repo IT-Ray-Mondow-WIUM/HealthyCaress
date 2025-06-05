@@ -20,6 +20,11 @@
                 <table class="table table-sm table-borderless">
                     <tbody>
                         <tr>
+                            <td class="fw-bold" style="width: 30%;">NIP</td>
+                            <td class="fw-bold" style="width: 5%">:</td>
+                            <td>{{ auth()->user()->employee->nip }}</td>
+                        </tr>
+                        <tr>
                             <td class="fw-bold" style="width: 30%;">NIK</td>
                             <td class="fw-bold" style="width: 5%">:</td>
                             <td>{{ auth()->user()->employee->nik }}</td>
@@ -27,22 +32,17 @@
                         <tr>
                             <td class="fw-bold">Jabatan</td>
                             <td class="fw-bold">:</td>
-                            <td>Manager</td>
+                            <td>{{ auth()->user()->employee->position->position }}</td>
                         </tr>
                         <tr>
-                            <td class="fw-bold">Departemen</td>
+                            <td class="fw-bold">No.Telepon</td>
                             <td class="fw-bold">:</td>
-                            <td>HRD</td>
+                            <td>{{ auth()->user()->employee->no_telp }}</td>
                         </tr>
                         <tr>
                             <td class="fw-bold">Email</td>
                             <td class="fw-bold">:</td>
                             <td>{{ auth()->user()->email }}</td>
-                        </tr>
-                        <tr>
-                            <td class="fw-bold">Telepon</td>
-                            <td class="fw-bold">:</td>
-                            <td>{{ auth()->user()->employee->no_telp }}</td>
                         </tr>
                     </tbody>
                 </table>
