@@ -50,6 +50,8 @@ Route::prefix('employee')->middleware('auth')->group(function () {
 });
 Route::prefix('position')->middleware('auth')->group(function () {
     Route::get('', [positionController::class, 'index'])->name('position');
+    Route::post('', [positionController::class, 'store'])->name('position.add');
+    Route::post('edit', [positionController::class, 'edit'])->name('position.edit');
 });
 
 Route::post('/logout', function (Request $request) {
