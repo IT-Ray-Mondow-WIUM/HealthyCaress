@@ -22,45 +22,56 @@
     <!-- Sidebar -->
     <div class="sidebar bg-info border-light" id="sidebar">
         <a href="{{ route('home') }}" class="@if(Request::is('home')) active @endif">
-            <i class="bi bi-house-door"></i> Dashboard
+            <i class="bi bi-house-door"></i> Beranda
         </a>
         <a href="{{ route('profile') }}" class="@if(Request::is('profile')) active @endif">
-            <i class="bi bi-person"></i> Profile
+            <i class="bi bi-person"></i> Profil
         </a>
 
-        <h6 class="border-bottom pb-1 ps-3 pt-3 fw-bolder">Main Menu</h6>
+        <h6 class="border-bottom pb-1 ps-3 pt-3 fw-bolder">Menu Utama</h6>
         <a href="{{ route('registration') }}" class="@if(Request::is('registration')) active @endif">
-            <i class="bi bi-card-checklist"></i> Registration
+            <i class="bi bi-card-checklist"></i> Pendaftaran
         </a>
 
         <!-- Medical Services with Submenus -->
         <div class="dropdown">
-            <a href="#" class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#medical-services">
-                <i class="bi bi-hospital"></i> Medical Services
+            <a href="#" class="dropdown-toggle @if(Request::is('medical-services')) active @endif"
+                data-bs-toggle="collapse" data-bs-target="#medical-services">
+                <i class="bi bi-hospital"></i> Layanan
             </a>
             <div class="collapse ps-3" id="medical-services">
-                <a href="#"><i class="bi bi-box-arrow-in-right"></i> Outpatient</a>
-                <a href="#"><i class="bi bi-hospital"></i> Inpatient</a>
+                <a href="#" class="dropdown-toggle @if(Request::is('medical-services')) active @endif"
+                    data-bs-toggle="collapse" data-bs-target="#outpatient">
+                    <i class="bi bi-heart-pulse"></i> Rawat Jalan
+                </a>
+                <div class="collapse ps-3" id="outpatient">
+                    <a href="{{ route('general-clinic') }}"
+                        class="@if(Request::is('medical-services')) active @endif"><i class="bi bi-journal-check"></i>
+                        Poli-Umum</a>
+                    <a href="#"><i class="bi bi-journal-check"></i> Poli-Gigi</a>
+                </div>
+
+                <a href="#"><i class="bi bi-heart-pulse-fill"></i> Rawat Inap</a>
             </div>
         </div>
 
-        <a href="#"><i class="bi bi-cash-stack"></i> Payment</a>
-        <a href="#"><i class="bi bi-capsule"></i> Pharmacy</a>
+        <a href="#"><i class="bi bi-cash-stack"></i> Pembayaran</a>
+        <a href="#"><i class="bi bi-capsule"></i> Farmasi</a>
 
-        <h6 class="border-bottom pb-1 ps-3 pt-3 fw-bolder">Main Data</h6>
+        <h6 class="border-bottom pb-1 ps-3 pt-3 fw-bolder">Menu Data</h6>
         <a href="{{ route('patient') }}" class="@if(Request::is('patient*')) active @endif"><i class="bi bi-people"></i>
-            Patient</a>
+            Pasien</a>
         <a href="{{ route('employee') }}" class="@if(Request::is('employee*')) active @endif"><i
-                class="bi bi-person-vcard"></i> Employee</a>
+                class="bi bi-person-vcard"></i> Pegawai</a>
         <a href="{{ route('position') }}" class="@if(Request::is('position*')) active @endif"><i
-                class="bi bi-person-lines-fill"></i> Position</a>
+                class="bi bi-person-lines-fill"></i> Jabatan</a>
 
         <!-- Logout -->
         <div class="mt-3 px-3">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit" class="btn btn-danger w-100">
-                    <i class="bi bi-box-arrow-right"></i> Logout
+                    <i class="bi bi-box-arrow-right"></i> Keluar
                 </button>
             </form>
         </div>
