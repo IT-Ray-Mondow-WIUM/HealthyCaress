@@ -41,7 +41,12 @@ Route::prefix('registration')->middleware('auth')->group(function () {
 });
 
 Route::prefix('medical-services')->middleware('auth')->group(function () {
-    Route::get('', [medicalServicesController::class, 'index'])->name('general-clinic');
+    Route::prefix('outpatient')->group(function () {
+        Route::prefix('general-clinic')->group(function () {
+            Route::get('', [medicalServicesController::class, 'index'])->name('general-clinic');
+            Route::post('show', [medicalServicesController::class, 'show'])->name('general-clinic.show');
+        });
+    });
 });
 
 Route::prefix('patient')->middleware('auth')->group(function () {
