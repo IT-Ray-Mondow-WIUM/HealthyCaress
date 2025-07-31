@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\pages\employeeController;
+use App\Http\Controllers\pages\medicalServicesController;
 use App\Http\Controllers\pages\patientController;
 use App\Http\Controllers\pages\positionController;
 use App\Http\Controllers\pages\profileController;
@@ -37,6 +38,10 @@ Route::prefix('profile')->middleware('auth')->group(function () {
 
 Route::prefix('registration')->middleware('auth')->group(function () {
     Route::get('', [registrationController::class, 'index'])->name('registration');
+});
+
+Route::prefix('medical-services')->middleware('auth')->group(function () {
+    Route::get('', [medicalServicesController::class, 'index'])->name('general-clinic');
 });
 
 Route::prefix('patient')->middleware('auth')->group(function () {
