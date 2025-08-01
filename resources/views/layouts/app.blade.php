@@ -35,25 +35,33 @@
 
         <!-- Medical Services with Submenus -->
         <div class="dropdown">
-            <a href="#" class="dropdown-toggle @if(Request::is('medical-services')) active @endif"
+            {{-- Layanan --}}
+            <a href="#" class="dropdown-toggle @if(Request::is('medical-services*')) active @endif"
                 data-bs-toggle="collapse" data-bs-target="#medical-services">
                 <i class="bi bi-hospital"></i> Layanan
             </a>
-            <div class="collapse ps-3" id="medical-services">
-                <a href="#" class="dropdown-toggle @if(Request::is('medical-services')) active @endif"
+            <div class="collapse ps-3 @if(Request::is('medical-services*')) show @endif" id="medical-services">
+                {{-- Rawat Jalan --}}
+                <a href="#" class="dropdown-toggle @if(Request::is('medical-services/outpatient*')) active @endif"
                     data-bs-toggle="collapse" data-bs-target="#outpatient">
                     <i class="bi bi-heart-pulse"></i> Rawat Jalan
                 </a>
-                <div class="collapse ps-3" id="outpatient">
+                <div class="collapse ps-3 @if(Request::is('medical-services/outpatient*')) show @endif" id="outpatient">
+                    {{-- Poli Umum --}}
                     <a href="{{ route('general-clinic') }}"
-                        class="@if(Request::is('medical-services')) active @endif"><i class="bi bi-journal-check"></i>
-                        Poli-Umum</a>
+                        class="@if(Request::is('medical-services/outpatient/general-clinic*')) active @endif">
+                        <i class="bi bi-journal-check"></i> Poli-Umum
+                    </a>
+
+                    {{-- Poli Gigi --}}
                     <a href="#"><i class="bi bi-journal-check"></i> Poli-Gigi</a>
                 </div>
 
+                {{-- Rawat Inap --}}
                 <a href="#"><i class="bi bi-heart-pulse-fill"></i> Rawat Inap</a>
             </div>
         </div>
+
 
         <a href="#"><i class="bi bi-cash-stack"></i> Pembayaran</a>
         <a href="#"><i class="bi bi-capsule"></i> Farmasi</a>
