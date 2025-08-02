@@ -65,9 +65,9 @@
                                     <td>{{ $patient['no_identitas'] }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Alamat</td>
+                                    <td>Agama</td>
                                     <td>:</td>
-                                    <td>{{ $patient['alamat'] }}</td>
+                                    <td>{{ ucfirst($registration->patient->religion->nama) }}</td>
                                 </tr>
                                 <tr>
                                     <td>T.T.L</td>
@@ -77,14 +77,12 @@
                                 <tr>
                                     <td>Jenis Kelamin</td>
                                     <td>:</td>
-                                    <td>{{ $patient['jenis_kelamin'] == 'l' ? 'Laki-laki' : 'Perempuan' }} <i
-                                            class="bi bi-check2-all text-primary"></i></td>
+                                    <td>{{ $patient['jenis_kelamin'] == 'l' ? 'Laki-laki' : 'Perempuan' }}</td>
                                 </tr>
                                 <tr>
                                     <td>Nomor Telepon</td>
                                     <td>:</td>
-                                    <td>{{ $patient['telepon_mobile'] }} <i class="bi bi-check2-all text-primary"></i>
-                                    </td>
+                                    <td>{{ $patient['telepon_mobile'] }} </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -93,9 +91,51 @@
                         <div class="text-center mx-3 mt-3" style="max-width: 200px;">
                             <img src="{{ asset('storage/photos/'.$patient['images']) }}" alt="Foto Pasien"
                                 class="shadow d-block mx-auto" style="width: 155px; height: 155px; object-fit: cover;">
-                            <button class="btn btn-danger btn-md w-100 mt-2">Rekam Medis</button>
+                            <button class="btn btn-success btn-md w-100 mt-2">Rekam Medis</button>
                         </div>
 
+                    </div>
+
+                    <div class="card-body d-flex flex-column flex-md-row justify-content-between align-items-center">
+                        <!-- Informasi Pasien -->
+                        <table class="table table-striped table-sm table-responsive">
+                            <tbody>
+                                <tr>
+                                    <td class="col-2">Alamat</td>
+                                    <td>:</td>
+                                    <td>{{ $patient['alamat'] }}</td>
+                                </tr>
+                                <tr>
+                                    <td class=""><small></small></td>
+                                    <td></td>
+                                    <td>
+                                        <small>
+                                            {{ $registration->patient->village->nama }},
+                                            Kec.{{ $registration->patient->district->nama }},
+                                            {{ $registration->patient->city->nama }},
+                                            {{ $registration->patient->province->nama }}
+                                        </small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Pekerjaan</td>
+                                    <td>:</td>
+                                    <td>{{ $registration->patient->job->nama }}</td>
+                                </tr>
+                                <tr>
+                                    <td>IHS</td>
+                                    <td>:</td>
+                                    <td><input type="text" value="{{ $patient['ihs'] }}" disabled> <i
+                                            class="bi bi-check2-all text-primary"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>BPJS</td>
+                                    <td>:</td>
+                                    <td><input type="text" value="" disabled> <i
+                                            class="bi bi-check2-all text-primary"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 

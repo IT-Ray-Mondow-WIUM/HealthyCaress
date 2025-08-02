@@ -11,4 +11,9 @@ class Religion extends Model
     use SoftDeletes, HasFactory;
     protected $table = 'religions';
     protected $fillable = ['nama'];
+
+    public function patient()
+    {
+        return $this->hasMany(Pasien::class, 'agama_id');
+    }
 }
