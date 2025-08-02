@@ -11,4 +11,9 @@ class Works extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'works';
     protected $fillable = ['nama'];
+
+    public function patient()
+    {
+        return $this->hasMany(Pasien::class, 'pekerjaan_id');
+    }
 }

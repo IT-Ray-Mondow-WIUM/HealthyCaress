@@ -11,7 +11,7 @@ class medicalServicesController extends Controller
 {
     public function index()
     {
-        $pendaftaran = Registration::where('clinic_id', 1)->whereDate('created_at', Carbon::today())->get();
+        $pendaftaran = Registration::where('clinic_id', 1)->whereDate('created_at', Carbon::today())->orderBy('created_at', 'desc')->get();
         return view("pages.medical-services-view", ["pendaftaran" => $pendaftaran]);
     }
 
@@ -19,7 +19,7 @@ class medicalServicesController extends Controller
     {
         $idpasien = Registration::findOrFail($request['id']);
         $pasien = $idpasien->patient->toArray();
-        return view('services.general-clinic-view', ['patient' => $pasien]);
-        // dd($pasien);
+        return view('services.general-clinic-view', ['patient' => $pasien, 'registration' => $idpasien]);
+        // dd($agama);
     }
 }

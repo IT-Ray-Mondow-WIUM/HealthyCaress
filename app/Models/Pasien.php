@@ -74,4 +74,12 @@ class Pasien extends Model
     {
         return $this->belongsTo(Villages::class, 'village_kode', 'kode');
     }
+    public function religion()
+    {
+        return $this->belongsTo(Religion::class, 'agama_id');
+    }
+    public function job()
+    {
+        return $this->belongsTo(Works::class, 'pekerjaan_id');
+    }
 }
