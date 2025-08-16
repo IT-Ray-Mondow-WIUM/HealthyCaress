@@ -21,6 +21,12 @@
 
     <!-- Sidebar -->
     <div class="sidebar bg-info border-light" id="sidebar">
+        <a class="text-light text-center fw-bold" href="#">
+            <small>
+                Welcome back, {{ auth()->user()->employee->nama ?? 'Anonym' }}!
+            </small>
+        </a>
+
         <a href="{{ route('home') }}" class="@if(Request::is('home')) active @endif">
             <i class="bi bi-house-door"></i> Beranda
         </a>
@@ -29,11 +35,17 @@
         </a>
 
         <h6 class="border-bottom pb-1 ps-3 pt-3 fw-bolder">Menu Utama</h6>
+        @if (Str::startsWith(auth()->user()->employee->position->position, 'Dokter') ||
+        in_array(auth()->user()->employee->position->position, ['Admin', 'SuperAdmin']))
         <a href="{{ route('registration') }}" class="@if(Request::is('registration')) active @endif">
             <i class="bi bi-card-checklist"></i> Pendaftaran
         </a>
+        @endif
 
         <!-- Medical Services with Submenus -->
+        @if (Str::startsWith(auth()->user()->employee->position->position, 'Dokter') ||
+        in_array(auth()->user()->employee->position->position,
+        ['Perawat', 'SuperAdmin']))
         <div class="dropdown">
             {{-- Layanan --}}
             <a href="#" class="dropdown-toggle @if(Request::is('medical-services*')) active @endif"
@@ -61,18 +73,30 @@
                 <a href="#"><i class="bi bi-heart-pulse-fill"></i> Rawat Inap</a>
             </div>
         </div>
+        @endif
 
-
+        @if (Str::startsWith(auth()->user()->employee->position->position, 'Dokter') ||
+        in_array(auth()->user()->employee->position->position,
+        ['Keuangan', 'SuperAdmin']))
         <a href="#"><i class="bi bi-cash-stack"></i> Pembayaran</a>
+        @endif
+        @if (Str::startsWith(auth()->user()->employee->position->position, 'Dokter') ||
+        in_array(auth()->user()->employee->position->position, ['Farmasi',
+        'Apoteker', 'SuperAdmin']))
         <a href="#"><i class="bi bi-capsule"></i> Farmasi</a>
+        @endif
 
         <h6 class="border-bottom pb-1 ps-3 pt-3 fw-bolder">Menu Data</h6>
         <a href="{{ route('patient') }}" class="@if(Request::is('patient*')) active @endif"><i class="bi bi-people"></i>
             Pasien</a>
+
+        @if (Str::startsWith(auth()->user()->employee->position->position,
+        'Dokter')||in_array(auth()->user()->employee->position->position, ['SuperAdmin']))
         <a href="{{ route('employee') }}" class="@if(Request::is('employee*')) active @endif"><i
                 class="bi bi-person-vcard"></i> Pegawai</a>
         <a href="{{ route('position') }}" class="@if(Request::is('position*')) active @endif"><i
                 class="bi bi-person-lines-fill"></i> Jabatan</a>
+        @endif
 
         <!-- Logout -->
         <div class="mt-3 px-3">

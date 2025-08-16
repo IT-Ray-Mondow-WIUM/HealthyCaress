@@ -18,8 +18,6 @@ class medicalServicesController extends Controller
     public function show(Request $request)
     {
         $idpasien = Registration::findOrFail($request['id']);
-        $pasien = $idpasien->patient->toArray();
-        return view('services.general-clinic-view', ['patient' => $pasien, 'registration' => $idpasien]);
-        // dd($agama);
+        return view('services.general-clinic-view', ['registration' => $idpasien]);
     }
 }
