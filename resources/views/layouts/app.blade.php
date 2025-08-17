@@ -96,6 +96,8 @@
                 class="bi bi-person-vcard"></i> Pegawai</a>
         <a href="{{ route('position') }}" class="@if(Request::is('position*')) active @endif"><i
                 class="bi bi-person-lines-fill"></i> Jabatan</a>
+        <a href="{{ route('diagnosa') }}" class="@if(Request::is('diagnosa*')) active @endif"><i
+                class="bi bi-clipboard2-pulse-fill"></i> Diagnosa</a>
         @endif
 
         <!-- Logout -->

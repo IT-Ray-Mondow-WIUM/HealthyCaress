@@ -4,8 +4,13 @@
 <div class="mt-2">
     <h2 class="mb-4">Poli Umum</h2>
 
-    <div class="table-responsive rounded shadow-sm">
-        <table class="table table-hover align-middle">
+    <!-- Kotak pencarian -->
+    <div class="mb-3 d-flex justify-content-end">
+        <input type="text" id="searchPoli" class="form-control form-control-sm w-25" placeholder="Cari pasien...">
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle" id="poliTable">
             <thead class="table-primary text-center">
                 <tr>
                     <th>No</th>
@@ -34,12 +39,25 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" class="text-center text-muted">Tidak ada data pasien.</td>
+                    <td colspan="6" class="text-center text-muted">Tidak ada data pasien.</td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
 
+
+    <!-- Script pencarian sederhana -->
+    <script>
+        document.getElementById("searchPoli").addEventListener("keyup", function() {
+        let value = this.value.toLowerCase();
+        let rows = document.querySelectorAll("#poliTable tbody tr");
+        rows.forEach(row => {
+            let text = row.innerText.toLowerCase();
+            row.style.display = text.includes(value) ? "" : "none";
+        });
+    });
+    </script>
 </div>
+
 @endsection

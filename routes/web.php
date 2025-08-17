@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\pages\diagnosaController;
 use App\Http\Controllers\pages\employeeController;
 use App\Http\Controllers\pages\medicalServicesController;
 use App\Http\Controllers\pages\patientController;
@@ -62,6 +63,9 @@ Route::prefix('position')->middleware('auth')->group(function () {
     Route::get('', [positionController::class, 'index'])->name('position');
     Route::post('', [positionController::class, 'store'])->name('position.add');
     Route::post('edit', [positionController::class, 'edit'])->name('position.edit');
+});
+Route::prefix('diagnosa')->middleware('auth')->group(function () {
+    Route::get('', [diagnosaController::class, 'index'])->name('diagnosa');
 });
 
 Route::post('/logout', function (Request $request) {
