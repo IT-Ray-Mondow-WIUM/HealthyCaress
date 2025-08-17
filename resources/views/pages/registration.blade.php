@@ -57,47 +57,57 @@
         <div class="tab-content mt-3" id="mainTabContent">
             <!-- Konten Pasien Lama -->
             <div class="tab-pane fade show active" id="list-patient" role="tabpanel" aria-labelledby="list-patient-tab">
-                <div class="container p-1" style="overflow-x: auto;">
-                    <table class="table table-striped table-hovered table-bordered table-sm">
-                        <thead class="table-light">
-                            <tr>
-                                <th colspan="7">Patient Registration List</th>
-                            </tr>
-                        </thead>
-                        <thead class="table-info">
-                            <tr class="text-center">
-                                <th scope='col'>No Kartu</th>
-                                <th scope='col'>Nama</th>
-                                <th scope='col'>Tanggal</th>
-                                <th scope='col'>Alamat</th>
-                                <th scope='col'>Jenis Pasien</th>
-                                <th scope='col'>Poliklinik</th>
-                                <th scope='col'>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($registration as $key=>$list)
-                            <tr>
-                                <td class="text-center">{{ $list->patient->no_kartu }}.</td>
-                                <td>{{ $list->patient->nama }}</td>
-                                <td class="text-center">{{ $list->created_at->format('d M, Y') }}</td>
-                                <td>{{ $list->patient->alamat }}</td>
-                                <td>Pasien {{ $list->jenis_pasien }}</td>
-                                <td class="text-center">{{ ucfirst($list->clinic->name) }}</td>
-                                <td class="text-center">
-                                    <button class="btn btn-primary"><i class="bi bi-eye"></i></button>
-                                    <button class="btn btn-danger"><i class="bi bi-trash"></i></button>
-                                </td>
-                            </tr>
-                            @empty
-                            <tr class="text-center">
-                                <td colspan="7">Tidak Ada Data</td>
-                            </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                <div class="container p-1">
+
+                    <!-- Kotak Pencarian -->
+                    <div class="mb-2 d-flex justify-content-end">
+                        <input type="text" id="searchPatient" class="form-control form-control-sm w-25"
+                            placeholder="Cari pasien...">
+                    </div>
+
+                    <div style="overflow-x: auto;">
+                        <table class="table table-striped table-hover table-bordered table-sm" id="patientTable">
+                            <thead class="table-light">
+                                <tr>
+                                    <th colspan="7" class="text-center">Patient Registration List</th>
+                                </tr>
+                            </thead>
+                            <thead class="table-info">
+                                <tr class="text-center">
+                                    <th scope='col'>No Kartu</th>
+                                    <th scope='col'>Nama</th>
+                                    <th scope='col'>Tanggal</th>
+                                    <th scope='col'>Alamat</th>
+                                    <th scope='col'>Jenis Pasien</th>
+                                    <th scope='col'>Poliklinik</th>
+                                    <th scope='col'>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse ($registration as $key=>$list)
+                                <tr>
+                                    <td class="text-center">{{ $list->patient->no_kartu }}</td>
+                                    <td>{{ $list->patient->nama }}</td>
+                                    <td class="text-center">{{ $list->created_at->format('d M, Y') }}</td>
+                                    <td>{{ $list->patient->alamat }}</td>
+                                    <td>Pasien {{ $list->jenis_pasien }}</td>
+                                    <td class="text-center">{{ ucfirst($list->clinic->name) }}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-sm btn-primary"><i class="bi bi-eye"></i></button>
+                                        <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                    </td>
+                                </tr>
+                                @empty
+                                <tr class="text-center">
+                                    <td colspan="7">Tidak Ada Data</td>
+                                </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
             <!-- Konten Pasien Lama -->
             <div class="tab-pane fade show" id="old-patient" role="tabpanel" aria-labelledby="old-patient-tab">
                 <livewire:Registration.OldPatientForm />
@@ -109,5 +119,19 @@
             </div>
         </div>
     </div>
+
+
+
+    <!-- Script pencarian sederhana -->
+    <script>
+        document.getElementById("searchPatient").addEventListener("keyup", function() {
+        let value = this.value.toLowerCase();
+        let rows = document.querySelectorAll("#patientTable tbody tr");
+        rows.forEach(row => {
+            let text = row.innerText.toLowerCase();
+            row.style.display = text.includes(value) ? "" : "none";
+        });
+    });
+    </script>
 </div>
 @endsection
