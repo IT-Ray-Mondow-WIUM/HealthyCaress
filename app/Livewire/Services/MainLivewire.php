@@ -3,6 +3,7 @@
 namespace App\Livewire\Services;
 
 use App\Models\IcdX;
+use App\Models\MedicalTreatment;
 use App\Models\Registration;
 use Livewire\Component;
 
@@ -12,13 +13,16 @@ class MainLivewire extends Component
     public $registrationID, $patient, $registration, $icdx = [];
     public $icdxNull, $kasusNull, $icdxList = [];
     public $searchicdx = "", $jenisKasus = "";
+    public $tindakan, $list_tindakan = [], $jumlah_tindakan, $tindakanTerpilih = [];
 
     public $selectedIcdxId;
 
     public function mount($id)
     {
         $this->registration = Registration::findOrFail($id);
+        $this->list_tindakan = MedicalTreatment::all();
         $this->patient = $this->registration->patient->toArray();
+        $this->registrationID = $id;
     }
 
     public function setTab($tab)
@@ -79,6 +83,29 @@ class MainLivewire extends Component
     {
         unset($this->icdxList[$index]);
         $this->icdxList = array_values($this->icdxList); // reset index
+    }
+
+    public function addTindakan()
+    {
+        if ($this->tindakan) {
+            $tindakan = MedicalTreatment::find($this->tindakan);
+            $this->tindakanTerpilih[] = [
+                'tindakan' => $tindakan->name,
+                'jumlah' => $this->jumlah_tindakan,
+                'tarif' => $tindakan->fee,
+                'dokter' => $this->registration->doctor->employee->nama
+            ];
+        } else {
+            $this->tindakanTerpilih = [];
+        }
+
+        $this->tindakan = "";
+        $this->jumlah_tindakan = '';
+    }
+    public function removeTindakan($index)
+    {
+        unset($this->tindakanTerpilih[$index]);
+        $this->tindakanTerpilih = array_values($this->tindakanTerpilih); // reset index
     }
 
     public function render()

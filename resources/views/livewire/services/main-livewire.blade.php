@@ -288,7 +288,7 @@
                             <div class="table-responsive mt-4">
                                 <table class="table table-hover table-striped align-middle table-bordered">
                                     <thead class="table-primary">
-                                        <tr>
+                                        <tr class="text-center">
                                             <th style="width: 5%;">No</th>
                                             <th style="width: 15%;">ICD X</th>
                                             <th style="width: 55%;">Keterangan</th>
@@ -303,7 +303,7 @@
                                             <td>{{ $item['kode'] }}</td>
                                             <td>{{ $item['nama'] }}</td>
                                             <td>{{ $item['jenis_kasus'] }}</td>
-                                            <td>
+                                            <td class="text-center">
                                                 <button class="btn btn-sm btn-danger"
                                                     wire:click="removeIcdx({{ $index }})">
                                                     <i class="bi bi-trash"></i>
@@ -332,32 +332,24 @@
                             {{-- Form Input ICD X & Jenis Kasus --}}
                             <div class="row g-3 align-items-end">
                                 <div class="col-md-4">
-                                    <label for="tindakan" class="form-label">Tindakan</label>
-                                    <div class="position-relative">
-                                        <input type="text" class="form-control" placeholder="Cari Tindakan..."
-                                            id="tindakan" />
-
-                                        {{-- @if(!empty($icdx))
-                                        <ul class="list-group mt-1">
-                                            @foreach($icdx as $list)
-                                            <li class="list-group-item list-group-item-action bg-secondary text-light"
-                                                wire:click="selectIcdx({{ $list->id }})">
-                                                {{ $list->no_dtd }} - {{ $list->nama }} ({{ $list->kode }})
-                                            </li>
-                                            @endforeach
-                                        </ul>
-                                        @endif --}}
-                                    </div>
+                                    <label for="list_tindakan" class="form-label">Tindakan</label>
+                                    <select id="list_tindakan" name="list_tindakan" class="form-select"
+                                        wire:model="tindakan" required>
+                                        <option value="" selected>== Pilih Tindakan ==</option>
+                                        @foreach ($list_tindakan as $item)
+                                        <option value="{{ $item->id }}">{{ $item->code }} - {{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="col-md-4">
                                     <label for="jumlah_tindakan" class="form-label">Jenis Kasus</label>
                                     <input type="text" class="form-control" placeholder="Jumlah ..."
-                                        id="jumlah_tindakan" />
+                                        id="jumlah_tindakan" wire:model="jumlah_tindakan" />
                                 </div>
 
                                 <div class="col-md-2">
-                                    <button type="button" class="btn btn-success w-100">
+                                    <button type="button" class="btn btn-success w-100" wire:click="addTindakan()">
                                         <i class="bi bi-plus-circle"></i> Tambah Tindakan
                                     </button>
                                 </div>
@@ -377,6 +369,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @forelse ($tindakanTerpilih as $key=>$item)
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $item['dokter'] }}</td>
+                                            <td>{{ $item['tindakan'] }}</td>
+                                            <td class="text-end">{{ $item['jumlah'] }}</td>
+                                            <td class="text-end">{{ number_format($item['tarif'], 2) }}</td>
+                                            <td class="text-center">
+                                                <button class="btn btn-sm btn-danger"
+                                                    wire:click="removeTindakan({{ $key }})">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        @empty
+                                        <tr class="text-center">
+                                            <td colspan="6">Belum Ada Tindakan</td>
+                                        </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
