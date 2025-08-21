@@ -39,7 +39,9 @@ class DatabaseSeeder extends Seeder
             familyRelationSeeders::class,
 
             ClinicServiceSeeders::class,
-            DoctorSeeders::class
+            DoctorSeeders::class,
+            ItemTypeSeeders::class,
+            ItemCategorySeeders::class
         ]);
     }
 }
