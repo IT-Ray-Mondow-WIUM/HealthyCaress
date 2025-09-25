@@ -3,6 +3,7 @@
 namespace App\Livewire\Services;
 
 use App\Models\IcdX;
+use App\Models\ItemDetail;
 use App\Models\MedicalTreatment;
 use App\Models\Registration;
 use Livewire\Component;
@@ -14,6 +15,8 @@ class MainLivewire extends Component
     public $icdxNull, $kasusNull, $icdxList = [];
     public $searchicdx = "", $jenisKasus = "";
     public $tindakan, $list_tindakan = [], $jumlah_tindakan, $tindakanTerpilih = [];
+    public $bhp, $list_bhp = [], $jumlah_bhp, $bhpTerpilih = [];
+    public $resep, $list_resep = [], $jumlah_resep, $resepTerpilih = [];
 
     public $selectedIcdxId;
 
@@ -21,6 +24,8 @@ class MainLivewire extends Component
     {
         $this->registration = Registration::findOrFail($id);
         $this->list_tindakan = MedicalTreatment::all();
+        $this->list_bhp = ItemDetail::where('category_id', 3)->get();
+        $this->list_resep = ItemDetail::whereIn('category_id', [1, 2])->get();
         $this->patient = $this->registration->patient->toArray();
         $this->registrationID = $id;
     }
@@ -108,8 +113,33 @@ class MainLivewire extends Component
         $this->tindakanTerpilih = array_values($this->tindakanTerpilih); // reset index
     }
 
+    public function addBhp(){
+        if ($this->bhp) {
+            $bhp = ItemDetail::find($this->bhp);
+            $this->bhpTerpilih[] = [
+                'bhp' => $bhp->name,
+                'jumlah' => $this->jumlah_bhp,
+                'tarif' => $bhp->cost_price
+            ];
+        } else {
+            $this->bhpTerpilih = [];
+        }
+
+        $this->bhp = '';
+        $this->jumlah_bhp = '';
+
+        dd($this->bhp);
+
+    }
+    public function removeBhp($index)
+    {
+        unset($this->bhpTerpilih[$index]);
+        $this->bhpTerpilih = array_values($this->bhpTerpilih); // reset index
+    }
+
     public function render()
     {
         return view('livewire.services.main-livewire');
+        // dd($this->list_bhp);
     }
 }
