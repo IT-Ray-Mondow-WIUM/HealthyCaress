@@ -125,10 +125,10 @@ class MainLivewire extends Component
             $this->bhpTerpilih = [];
         }
 
+
+        // dd($this->bhp);
         $this->bhp = '';
         $this->jumlah_bhp = '';
-
-        dd($this->bhp);
 
     }
     public function removeBhp($index)
