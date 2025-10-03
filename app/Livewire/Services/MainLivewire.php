@@ -113,7 +113,8 @@ class MainLivewire extends Component
         $this->tindakanTerpilih = array_values($this->tindakanTerpilih); // reset index
     }
 
-    public function addBhp(){
+    public function addBhp()
+    {
         if ($this->bhp) {
             $bhp = ItemDetail::find($this->bhp);
             $this->bhpTerpilih[] = [
@@ -129,12 +130,35 @@ class MainLivewire extends Component
         // dd($this->bhp);
         $this->bhp = '';
         $this->jumlah_bhp = '';
-
     }
     public function removeBhp($index)
     {
         unset($this->bhpTerpilih[$index]);
         $this->bhpTerpilih = array_values($this->bhpTerpilih); // reset index
+    }
+
+    public function addRecipe()
+    {
+        if ($this->resep) {
+            $resep = ItemDetail::find($this->resep);
+            $this->resepTerpilih[] = [
+                'resep' => $resep->name,
+                'jumlah' => $this->jumlah_resep,
+                'tarif' => $resep->cost_price
+            ];
+        } else {
+            $this->resepTerpilih = [];
+        }
+
+
+        // dd($this->bhp);
+        $this->resep = '';
+        $this->jumlah_resep = '';
+    }
+    public function removeRecipe($index)
+    {
+        unset($this->resepTerpilih[$index]);
+        $this->resepTerpilih = array_values($this->resepTerpilih); // reset index
     }
 
     public function render()
